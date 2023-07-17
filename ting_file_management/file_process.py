@@ -1,26 +1,23 @@
-import os
+import sys
 from ting_file_management.file_management import txt_importer
 
 
-def process(queue, file_path):
-    file_name = os.path.basename(file_path)
+def process(path_file, instance):
+    for index in range(len(instance)):
+        if instance.search(index)["nome_do_arquivo"] == path_file:
+            return None
 
-    if queue.contains(file_name):
-        return
+    text = txt_importer(path_file)
 
-    data = txt_importer(file_path)
-    if not data:
-        return
-
-    processed_data = {
-        'nome_do_arquivo': file_name,
-        'qtd_linhas': len(data),
-        'linhas_do_arquivo': data
+    data = {
+        "nome_do_arquivo": path_file,
+        "qtd_linhas": len(text),
+        "linhas_do_arquivo": text,
     }
 
-    queue.enqueue(file_name)
+    instance.enqueue(data)
 
-    print(processed_data)
+    sys.stdout.write(str(data))
 
 
 def remove(instance):
