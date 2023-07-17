@@ -3,7 +3,8 @@ import sys
 
 
 def txt_importer(path_file):
-    if not path_file.endswith(".txt"):
+    file_type = ".txt"
+    if file_type not in path_file:
         print("Formato inválido", file=sys.stderr)
 
     if not os.path.exists(path_file):
@@ -11,6 +12,5 @@ def txt_importer(path_file):
     else:
         return None
 
-    with open(path_file, "r") as file:
-        content = file.read()
-        return content.split("\n")
+    with open(path_file, "r") as content:
+        return content.read().split("\n")
