@@ -21,7 +21,7 @@ def process(path_file, instance):
 
 
 def remove(instance):
-    if len(instance.list) == 0:
+    if len(instance) == 0:
         print("Não há elementos", file=sys.stdout)
     else:
         file = instance.list[0]
